@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Request</title>
+    <title>Ask for a Date</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,18 +34,53 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin: 10px;
+           
+            width: 100%;
         }
-        .yes {
+        .btn:hover{
             background-color: #ff4081;
             color: white;
         }
-        .no {
+        .btn-yes {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+        .btn-yes:hover{
+            transform: scale(1.1);
+        }
+        .btn-no {
             background-color: #ddd;
             color: black;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+        .btn-no:hover{
+            transform: scale(-0.5);
         }
         .hidden {
             display: none;
+        }
+        .loading {
+            font-size: 1.2rem;
+            color: #ff4081;
+            margin-top: 10px;
+        }
+        input{
+            height: 30px;
+            width: 80%;
+border: 1px solid rgb(226, 226, 226);
+            margin: 0;
+            
         }
         @media (max-width: 600px) {
             h1 {
@@ -60,15 +95,23 @@
 </head>
 <body>
     <div class="container" id="nameForm">
+        <img src="hamster-15197_256.gif" alt="">
         <h1>Enter your first name:</h1>
-        <input type="text" id="firstName" placeholder="Your Name" />
+        <input type="text" id="firstName" placeholder=" Your Name" /><br><br>
         <button class="btn" onclick="checkName()">Submit</button>
+    </div>
+
+    <div class="container hidden" id="extraQuestion">
+        <img src="pokemon-8939_256.gif" alt="">
+        <h1>Are you ready for a fun question? 😊</h1>
+        <button class="btn" onclick="showLoading()">Yes, bring it on!</button>
+        <div id="loadingMessage" class="loading hidden">Loading...</div>
     </div>
 
     <div class="container hidden" id="dateRequest">
         <h1>Will you go on a date with me? ❤️</h1>
-        <button class="btn yes" onclick="sendWhatsApp('Yes')">Yes</button>
-        <button class="btn no" onclick="sendWhatsApp('No')">No</button>
+        <button class="btn-yes" onclick="sendNotification()">Yes</button>
+        <button class="btn-no" id="noBtn" onclick="sendNoNotification()">No</button>
     </div>
 
     <script>
@@ -76,19 +119,54 @@
             const nameInput = document.getElementById("firstName").value.trim();
             if (nameInput.toLowerCase() === "jayoda") {
                 document.getElementById("nameForm").classList.add("hidden");
-                document.getElementById("dateRequest").classList.remove("hidden");
+                document.getElementById("extraQuestion").classList.remove("hidden");
             } else {
                 alert("Sorry, only 'Your first name' can proceed!");
             }
         }
 
-        function sendWhatsApp(response) {
-            alert(`You selected: ${response}`);
+        function showLoading() {
+            // Show the loading message
+            document.getElementById("loadingMessage").classList.remove("hidden");
 
+            // Simulate a short delay before showing the next question
+            setTimeout(() => {
+                showDateRequest();
+            }, 3000); // 2-second delay
+        }
+
+        function showDateRequest() {
+            document.getElementById("extraQuestion").classList.add("hidden");
+            document.getElementById("dateRequest").classList.remove("hidden");
+
+            // Hide the loading message after transition
+            document.getElementById("loadingMessage").classList.add("hidden");
+        }
+
+        function sendNotification() {
+            alert('Yay! See you soon! ❤️');
+            
             const phoneNumber = "94761299005"; // Replace with your WhatsApp number
-            const message = encodeURIComponent(response); // Ensure emojis are encoded correctly
+            const message = encodeURIComponent("Said YES! ❤️");
             window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
         }
+
+        function sendNoNotification() {
+            alert('Oh well, maybe next time! 😅');
+            
+            const phoneNumber = "94761299005"; // Replace with your WhatsApp number
+            const message = encodeURIComponent("Said NO! 😅");
+            window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+        }
+
+        // Stop the "No" button from sliding around
+        const noBtn = document.getElementById("noBtn");
+        noBtn.removeEventListener("mouseover", () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        });
     </script>
 </body>
 </html>
