@@ -46,3 +46,13 @@ overflow: hidden;
 
 
 }
+#yes{
+   transition: transform 0.3s ease;
+}
+#yes:hover{
+    transform: scale(1.1);
+}
+#no{
+    transition: top 0.4s ease, left 0.4s ease;
+    position: absolute;
+}
