@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask for a Date</title>
+    <title>Special Request</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,7 +43,6 @@
         .no {
             background-color: #ddd;
             color: black;
-            position: absolute;
         }
         .hidden {
             display: none;
@@ -68,36 +67,28 @@
 
     <div class="container hidden" id="dateRequest">
         <h1>Will you go on a date with me? ❤️</h1>
-        <button class="btn yes" onclick="sendNotification()">Yes</button>
-        <button class="btn no" id="noBtn">No</button>
+        <button class="btn yes" onclick="sendWhatsApp('Yes')">Yes</button>
+        <button class="btn no" onclick="sendWhatsApp('No')">No</button>
     </div>
 
     <script>
         function checkName() {
             const nameInput = document.getElementById("firstName").value.trim();
-            if (nameInput.toLowerCase() === "name") {
+            if (nameInput.toLowerCase() === "jayoda") {
                 document.getElementById("nameForm").classList.add("hidden");
                 document.getElementById("dateRequest").classList.remove("hidden");
             } else {
-                alert("Sorry, only 'name' can proceed!");
+                alert("Sorry, only 'Your first name' can proceed!");
             }
         }
 
-        function sendNotification() {
-            alert('Yay! See you soon! ❤️');
-            
+        function sendWhatsApp(response) {
+            alert(`You selected: ${response}`);
+
             const phoneNumber = "94761299005"; // Replace with your WhatsApp number
-            const message = encodeURIComponent("She said YES! ❤️");
+            const message = encodeURIComponent(response); // Ensure emojis are encoded correctly
             window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
         }
-
-        const noBtn = document.getElementById("noBtn");
-        noBtn.addEventListener("mouseover", () => {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-        });
     </script>
 </body>
 </html>
