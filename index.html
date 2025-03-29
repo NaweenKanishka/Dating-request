@@ -45,6 +45,9 @@
             color: black;
             position: absolute;
         }
+        .hidden {
+            display: none;
+        }
         @media (max-width: 600px) {
             h1 {
                 font-size: 1.2rem;
@@ -57,13 +60,37 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="nameForm">
+        <h1>Enter your first name:</h1>
+        <input type="text" id="firstName" placeholder="Your Name" />
+        <button class="btn" onclick="checkName()">Submit</button>
+    </div>
+
+    <div class="container hidden" id="dateRequest">
         <h1>Will you go on a date with me? ❤️</h1>
-        <button class="btn yes" onclick="alert('Yay! See you soon! ❤️')">Yes</button>
+        <button class="btn yes" onclick="sendNotification()">Yes</button>
         <button class="btn no" id="noBtn">No</button>
     </div>
 
     <script>
+        function checkName() {
+            const nameInput = document.getElementById("firstName").value.trim();
+            if (nameInput.toLowerCase() === "name") {
+                document.getElementById("nameForm").classList.add("hidden");
+                document.getElementById("dateRequest").classList.remove("hidden");
+            } else {
+                alert("Sorry, only 'name' can proceed!");
+            }
+        }
+
+        function sendNotification() {
+            alert('Yay! See you soon! ❤️');
+            
+            const phoneNumber = "94761299005"; // Replace with your WhatsApp number
+            const message = encodeURIComponent("She said YES! ❤️");
+            window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+        }
+
         const noBtn = document.getElementById("noBtn");
         noBtn.addEventListener("mouseover", () => {
             const x = Math.random() * (window.innerWidth - 100);
