@@ -118,7 +118,7 @@ border: 1px solid rgb(226, 226, 226);
     <script>
         function checkName() {
             const nameInput = document.getElementById("firstName").value.trim();
-            if (nameInput.toLowerCase() === "jayoda") {
+            if (nameInput.toLowerCase() === "name") {
                 document.getElementById("nameForm").classList.add("hidden");
                 document.getElementById("extraQuestion").classList.remove("hidden");
             } else {
@@ -155,7 +155,7 @@ border: 1px solid rgb(226, 226, 226);
         function sendNoNotification() {
             alert('Oh well, maybe next time! 😅');
             
-            const phoneNumber = "94761299005"; // Replace with your WhatsApp number
+            const phoneNumber = "phone_number"; // Replace with your WhatsApp number
             const message = encodeURIComponent("Said NO! 😅");
             window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
         }
