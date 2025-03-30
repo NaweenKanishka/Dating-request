@@ -110,15 +110,15 @@ border: 1px solid rgb(226, 226, 226);
 
     <div class="container hidden" id="dateRequest">
         <img src="heart-493_256.gif" alt="">
-        <h1>Will you go on a date with me? ❤️</h1>
-        <button class="btn-yes" onclick="sendNotification()">Yes</button>
-        <button class="btn-no" id="noBtn" onclick="sendNoNotification()">No</button>
+        <h1>What type Teddy do you like? ❤️</h1>
+        <button class="btn-yes" onclick="sendNotification()">Small</button>
+        <button class="btn-no" id="noBtn" onclick="sendNoNotification()">Big</button>
     </div>
 
     <script>
         function checkName() {
             const nameInput = document.getElementById("firstName").value.trim();
-            if (nameInput.toLowerCase() === "name") {
+            if (nameInput.toLowerCase() === "jayoda") {
                 document.getElementById("nameForm").classList.add("hidden");
                 document.getElementById("extraQuestion").classList.remove("hidden");
             } else {
@@ -133,7 +133,7 @@ border: 1px solid rgb(226, 226, 226);
             // Simulate a short delay before showing the next question
             setTimeout(() => {
                 showDateRequest();
-            }, 6000); // 2-second delay
+            }, 1000); // 2-second delay
         }
 
         function showDateRequest() {
@@ -145,18 +145,18 @@ border: 1px solid rgb(226, 226, 226);
         }
 
         function sendNotification() {
-            alert('Yay! See you soon! ❤️');
+            alert('Yay! I will get you one soon! ❤️');
             
             const phoneNumber = "94761299005"; // Replace with your WhatsApp number
-            const message = encodeURIComponent("Said YES! ❤️");
+            const message = encodeURIComponent("Small one ❤️");
             window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
         }
 
         function sendNoNotification() {
-            alert('Oh well, maybe next time! 😅');
+            alert('Oh really, It is too much, maybe next time! 😅');
             
-            const phoneNumber = "phone_number"; // Replace with your WhatsApp number
-            const message = encodeURIComponent("Said NO! 😅");
+            const phoneNumber = "94761299005"; // Replace with your WhatsApp number
+            const message = encodeURIComponent("Big one 😅");
             window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
         }
 
